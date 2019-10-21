@@ -1,0 +1,26 @@
+<scene>
+    <camera>
+        <position>
+            <x>0</x>
+            <y>0</y>
+            <z>10</z>
+        </position>
+        <orientation>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </orientation>
+    </camera>
+    <camera>
+        <position>
+            <x>0</x>
+            <y>0</y>
+            <z>-10</z>
+        </position>
+        <orientation>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </orientation>
+    </camera>
+</scene>

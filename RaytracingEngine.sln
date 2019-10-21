@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29411.138
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracingEngine", "RaytracingEngine\RaytracingEngine.vcxproj", "{C5281062-FDA6-4048-B8F3-F2EB6F456E7E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests\UnitTests.vcxproj", "{8B80FE69-6212-4BD6-A8BE-4C208282A44C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{C5281062-FDA6-4048-B8F3-F2EB6F456E7E}.Release|x64.Build.0 = Release|x64
 		{C5281062-FDA6-4048-B8F3-F2EB6F456E7E}.Release|x86.ActiveCfg = Release|Win32
 		{C5281062-FDA6-4048-B8F3-F2EB6F456E7E}.Release|x86.Build.0 = Release|Win32
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Debug|x64.ActiveCfg = Debug|x64
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Debug|x64.Build.0 = Debug|x64
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Debug|x86.ActiveCfg = Debug|Win32
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Debug|x86.Build.0 = Debug|Win32
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x64.ActiveCfg = Release|x64
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x64.Build.0 = Release|x64
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x86.ActiveCfg = Release|Win32
+		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
