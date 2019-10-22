@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "Scene/Camera.h"
-#include "Scene/Camera.cpp"
 #include "Scene/Scene.h"
-#include "Scene/Scene.cpp"
-#include "Geometry/Vector3.h"
-#include "Geometry/Vector3.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

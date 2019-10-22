@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracingEngine", "Raytrac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests\UnitTests.vcxproj", "{8B80FE69-6212-4BD6-A8BE-4C208282A44C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracingEngineCLI", "RaytracingEngineCLI\RaytracingEngineCLI.vcxproj", "{17C56ED9-1D37-4F61-B550-A495F11083AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x64.Build.0 = Release|x64
 		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x86.ActiveCfg = Release|Win32
 		{8B80FE69-6212-4BD6-A8BE-4C208282A44C}.Release|x86.Build.0 = Release|Win32
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Debug|x64.ActiveCfg = Debug|x64
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Debug|x64.Build.0 = Debug|x64
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Debug|x86.ActiveCfg = Debug|Win32
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Debug|x86.Build.0 = Debug|Win32
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Release|x64.ActiveCfg = Release|x64
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Release|x64.Build.0 = Release|x64
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Release|x86.ActiveCfg = Release|Win32
+		{17C56ED9-1D37-4F61-B550-A495F11083AE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
