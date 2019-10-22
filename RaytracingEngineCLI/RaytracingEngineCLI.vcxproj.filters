@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\RaytracingEngine\Source\raytracingEngine.cpp">
+    <ClCompile Include="raytracingEngineCLI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
