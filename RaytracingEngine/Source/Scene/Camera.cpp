@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Camera::Camera(xml_node<>* node)
+Camera::Camera(const xml_node<>* node)
 {
 	if (!node)
 		throw runtime_error{ "malformed input, camera node not found" };

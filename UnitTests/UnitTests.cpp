@@ -4,7 +4,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-const float EPSILON{ .0001 };
+const float EPSILON{ .0001f };
 
 bool areFloatsEqual(float x, float y) {
 	return abs(x - y) < EPSILON;

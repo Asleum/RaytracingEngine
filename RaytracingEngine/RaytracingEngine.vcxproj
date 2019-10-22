@@ -19,14 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lib\lodepng.cpp" />
+    <ClCompile Include="Source\Geometry\Ray.cpp" />
     <ClCompile Include="Source\Geometry\Vector3.cpp" />
+    <ClCompile Include="Source\Scene\AbstractShape.cpp" />
     <ClCompile Include="Source\Scene\Camera.cpp" />
     <ClCompile Include="Source\Scene\Scene.cpp" />
+    <ClCompile Include="Source\Scene\Shapes\Plane.cpp" />
+    <ClCompile Include="Source\Scene\Shapes\Sphere.cpp" />
+    <ClCompile Include="Source\Utils\xmlUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Lib\lodepng.h" />
+    <ClInclude Include="Source\Geometry\Ray.h" />
     <ClInclude Include="Source\Geometry\Vector3.h" />
+    <ClInclude Include="Source\Scene\AbstractShape.h" />
     <ClInclude Include="Source\Scene\Camera.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
+    <ClInclude Include="Source\Scene\Shapes\Plane.h" />
+    <ClInclude Include="Source\Scene\Shapes\Sphere.h" />
+    <ClInclude Include="Source\Utils\xmlUtils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -79,7 +91,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ClangTidyChecks>-clang-diagnostic-pragma-once-outside-header</ClangTidyChecks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ClangTidyChecks>-clang-diagnostic-pragma-once-outside-header</ClangTidyChecks>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
