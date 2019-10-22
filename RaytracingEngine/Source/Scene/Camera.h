@@ -1,10 +1,13 @@
 #pragma once
-#include <string>
+#include "Geometry\Vector3.h"
 
 class Camera
 {
+	Vector3 position;
+	Vector3 orientation;
 public:
-	Camera(std::string i) {}
-	Camera() {}
+	Camera(xml_node<>* node);
+	const Vector3& getPosition() const { return position; }
+	const Vector3& getOrientation() const { return orientation; }
 };
 

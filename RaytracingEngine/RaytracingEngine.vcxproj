@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Geometry\Vector3.cpp" />
     <ClCompile Include="Source\raytracingEngine.cpp" />
     <ClCompile Include="Source\Scene\Camera.cpp" />
     <ClCompile Include="Source\Scene\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Geometry\Vector3.h" />
     <ClInclude Include="Source\Scene\Camera.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
   </ItemGroup>

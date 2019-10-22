@@ -13,14 +13,14 @@ Scene::Scene(const string& filename)
 
 	if (xml_node<>* root{ document.first_node("scene") })
 	{
-		for (xml_node<>* attr{ root->first_node() }; attr; attr = attr->next_sibling())
+		for (xml_node<>* node{ root->first_node() }; node; node = node->next_sibling())
 		{
-			string name{ attr->name() };
+			string name{ node->name() };
 			if (name == "camera")
 			{
-				if (m_camera)
+				if (m_pCamera)
 					throw runtime_error{ "malformed input file, has multiple cameras" };
-				m_camera = unique_ptr<Camera>{ new Camera };
+				m_pCamera = unique_ptr<Camera>{ new Camera{ node } };
 			}
 		}
 	}
