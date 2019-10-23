@@ -13,17 +13,29 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="TestClasses">
+      <UniqueIdentifier>{da21da2b-2590-4d41-8edf-82e8e5cd3f51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UnitTests.cpp">
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="TestClasses\FormatTests.cpp">
+      <Filter>TestClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClasses\VectorTests.cpp">
+      <Filter>TestClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="testUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

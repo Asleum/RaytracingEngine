@@ -42,18 +42,32 @@ Scene::Scene(const string& filename) : m_inputFilename { filename }
 void Scene::makeImage(int resolutionX, int resolutionY)
 {
 	vector<unsigned char> image;
-	image.resize(resolutionX * resolutionY * 4);
-	for (int x = 0; x != resolutionX; ++x)
+	image.reserve(resolutionX * resolutionY * 4);
+	for (Ray& ray : m_pCamera->getViewportRays(resolutionX, resolutionY))
 	{
-		for (int y = 0; y != resolutionY; ++y)
+		Color color = traceRay(ray);
+		image.push_back(color.getX());
+		image.push_back(color.getY());
+		image.push_back(color.getZ());
+		image.push_back(255);
+	}
+
+	if (auto error = lodepng::encode(m_inputFilename + ".png", image, resolutionX, resolutionY))
+		throw runtime_error(lodepng_error_text(error));
+}
+
+Color Scene::traceRay(const Ray& ray)
+{
+	IntersectionResult intersection;
+	for (auto& shape: m_shapes)
+	{
+		IntersectionResult result = shape->intersect(ray);
+		if (result.intersects && (!intersection.intersects || result.distance < intersection.distance))
 		{
-			Ray r{ {0, 0, 0}, {0, 0, 0} };
-			image[4 * resolutionX * y + 4 * x + 0] = traceRay(r) ? 255 : 0;
-			image[4 * resolutionX * y + 4 * x + 1] = 0;
-			image[4 * resolutionX * y + 4 * x + 2] = 0;
-			image[4 * resolutionX * y + 4 * x + 3] = 255;
+			intersection = result;
 		}
 	}
-	if (!lodepng::encode(m_inputFilename + ".png", image, resolutionX, resolutionY))
-		throw runtime_error("error when encoding png image");
+	if (!intersection.intersects)
+		return Color{ 0, 0, 0 };
+	return Color{0, 255, 0};
 }

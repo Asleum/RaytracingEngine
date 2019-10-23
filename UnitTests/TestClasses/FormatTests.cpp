@@ -1,14 +1,9 @@
-#include "../pch.h"
+#include "pch.h"
 #include "CppUnitTest.h"
 #include "Scene/Scene.h"
+#include "testUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
-const float EPSILON{ .0001f };
-
-bool areFloatsEqual(float x, float y) {
-	return abs(x - y) < EPSILON;
-}
 
 namespace UnitTests
 {

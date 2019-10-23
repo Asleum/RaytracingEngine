@@ -6,9 +6,10 @@
 class Sphere :
 	public AbstractShape
 {
-	float radius;
-	Vector3f position;
+	float m_radius;
+	Vector3f m_position;
 public:
 	Sphere(const xml_node<>* node);
+	IntersectionResult intersect(const Ray& ray) const;
 };
 

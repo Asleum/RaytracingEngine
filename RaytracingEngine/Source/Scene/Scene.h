@@ -14,7 +14,7 @@ class Scene
 	unique_ptr<Camera> m_pCamera;
 	vector<unique_ptr<AbstractShape>> m_shapes;
 
-	bool traceRay(const Ray& ray) { return false; };
+	Color traceRay(const Ray& ray);
 public:
 	Scene(const string& filename);
 	const unique_ptr<Camera>& getCamera() const { return m_pCamera; }
