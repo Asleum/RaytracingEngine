@@ -7,7 +7,7 @@ class Sphere :
 	public AbstractShape
 {
 	float radius;
-	Vector3 position;
+	Vector3f position;
 public:
 	Sphere(const xml_node<>* node);
 };

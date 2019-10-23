@@ -9,8 +9,8 @@ using namespace rapidxml;
 class Plane :
 	public AbstractShape
 {
-	Vector3 position;
-	Vector3 normal;
+	Vector3f position;
+	Vector3f normal;
 public:
 	Plane(const xml_node<>* node);
 };

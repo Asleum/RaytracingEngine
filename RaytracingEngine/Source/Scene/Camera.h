@@ -3,11 +3,11 @@
 
 class Camera
 {
-	Vector3 position;
-	Vector3 orientation;
+	Vector3f position;
+	Vector3f orientation;
 public:
 	Camera(const xml_node<>* node);
-	const Vector3& getPosition() const { return position; }
-	const Vector3& getOrientation() const { return orientation; }
+	const Vector3f& getPosition() const { return position; }
+	const Vector3f& getOrientation() const { return orientation; }
 };
 

@@ -3,11 +3,11 @@
 
 class Ray
 {
-	Vector3 origin;
-	Vector3 direction;
+	Vector3f origin;
+	Vector3f direction;
 public:
-	Ray(const Vector3& origin, const Vector3& direction) : origin{ origin }, direction{ direction } {}
-	const Vector3& getOrigin() const { return origin; }
-	const Vector3& getDirection() const { return direction; }
+	Ray(const Vector3f& origin, const Vector3f& direction) : origin{ origin }, direction{ direction } {}
+	const Vector3f& getOrigin() const { return origin; }
+	const Vector3f& getDirection() const { return direction; }
 };
 

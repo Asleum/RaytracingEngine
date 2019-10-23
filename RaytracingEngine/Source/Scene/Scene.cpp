@@ -41,18 +41,19 @@ Scene::Scene(const string& filename) : m_inputFilename { filename }
 
 void Scene::makeImage(int resolutionX, int resolutionY)
 {
-	//image<rgba_pixel> image{ resolutionX, resolutionY };
 	vector<unsigned char> image;
 	image.resize(resolutionX * resolutionY * 4);
 	for (int x = 0; x != resolutionX; ++x)
 	{
 		for (int y = 0; y != resolutionY; ++y)
 		{
-			image[4 * resolutionX * y + 4 * x + 0] = 0;
+			Ray r{ {0, 0, 0}, {0, 0, 0} };
+			image[4 * resolutionX * y + 4 * x + 0] = traceRay(r) ? 255 : 0;
 			image[4 * resolutionX * y + 4 * x + 1] = 0;
 			image[4 * resolutionX * y + 4 * x + 2] = 0;
 			image[4 * resolutionX * y + 4 * x + 3] = 255;
 		}
 	}
-	lodepng::encode(m_inputFilename + ".png", image, resolutionX, resolutionY);
+	if (!lodepng::encode(m_inputFilename + ".png", image, resolutionX, resolutionY))
+		throw runtime_error("error when encoding png image");
 }

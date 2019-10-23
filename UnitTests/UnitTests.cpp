@@ -40,8 +40,8 @@ namespace UnitTests
 		{
 			Scene s{ "../TestInputs/BasicScene.xml" };
 			Assert::IsTrue(s.getCamera() != nullptr);
-			Vector3 position = s.getCamera()->getPosition();
-			Vector3 orientation = s.getCamera()->getOrientation();
+			Vector3f position = s.getCamera()->getPosition();
+			Vector3f orientation = s.getCamera()->getOrientation();
 			Assert::IsTrue(areFloatsEqual(position.getX(), 0));
 			Assert::IsTrue(areFloatsEqual(position.getY(), 0));
 			Assert::IsTrue(areFloatsEqual(position.getZ(), 10));
