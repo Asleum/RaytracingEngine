@@ -5,10 +5,8 @@
 
 using namespace std;
 
-Sphere::Sphere(const xml_node<>* node)
+Sphere::Sphere(const xml_node<>* node) : AbstractShape(node)
 {
-	if (!node)
-		throw runtime_error{ "malformed input, sphere node not found" };
 	m_radius = readValue<float>(node->first_node("radius"));
 	m_position = Vector3f{ node->first_node("position") };
 }
@@ -33,5 +31,6 @@ IntersectionResult Sphere::intersect(const Ray& ray) const
 	result.distance = (t1 < 0) ? t2 : t1;
 	result.position = ray.getOrigin() + ray.getDirection() * result.distance;
 	result.surfaceNormal = (result.position - m_position).normalized();
+	result.materialName = m_materialName;
 	return result;
 }

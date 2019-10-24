@@ -11,17 +11,17 @@ int main(int argc, char* argv [])
 		return 0;
 	}
 
-	try {
+	//try {
 		cout << "processing file : " << argv[1] << endl;
 		Scene scene{ argv[1] };
 		scene.makeImage(500, 300);
 		cout << "done" << endl;
-	}
-	catch (runtime_error e)
-	{
-		cout << e.what() << endl;
-		return 1;
-	}
+	//}
+	//catch (runtime_error e)
+	//{
+	//	cout << e.what() << endl;
+	//	return 1;
+	//}
 
 	return 0;
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene/AbstractShape.h"
 #include "Geometry/Vector3.h"
-#include "rapidxml.hpp"
+
 
 class Sphere :
 	public AbstractShape

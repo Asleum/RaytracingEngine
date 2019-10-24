@@ -4,10 +4,8 @@
 
 using namespace std;
 
-Plane::Plane(const xml_node<>* node)
+Plane::Plane(const xml_node<>* node) : AbstractShape(node)
 {
-	if (!node)
-		throw runtime_error{ "malformed input, plane node not found" };
 	m_position = Vector3f{ node->first_node("position") };
 	m_normal = Vector3f{ node->first_node("normal") }.normalized();
 }
@@ -23,5 +21,6 @@ IntersectionResult Plane::intersect(const Ray& ray) const
 	result.distance = t;
 	result.position = ray.getOrigin() + ray.getDirection() * t;
 	result.surfaceNormal = m_normal;
+	result.materialName = m_materialName;
 	return result;
 }
