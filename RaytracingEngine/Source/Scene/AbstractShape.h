@@ -11,6 +11,7 @@ struct IntersectionResult {
 	string materialName;
 	float distance;
 	bool intersects{ false };
+	bool inside;
 };
 
 class AbstractShape

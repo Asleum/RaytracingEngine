@@ -32,5 +32,6 @@ IntersectionResult Sphere::intersect(const Ray& ray) const
 	result.position = ray.getOrigin() + ray.getDirection() * result.distance;
 	result.surfaceNormal = (result.position - m_position).normalized();
 	result.materialName = m_materialName;
+	result.inside = t1 < 0;
 	return result;
 }

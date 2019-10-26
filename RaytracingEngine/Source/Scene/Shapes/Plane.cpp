@@ -20,7 +20,8 @@ IntersectionResult Plane::intersect(const Ray& ray) const
 	result.intersects = true;
 	result.distance = t;
 	result.position = ray.getOrigin() + ray.getDirection() * t;
-	result.surfaceNormal = m_normal;
+	result.surfaceNormal = m_normal.dot(ray.getDirection()) > 0 ? -m_normal : m_normal;
 	result.materialName = m_materialName;
+	result.inside = false;
 	return result;
 }

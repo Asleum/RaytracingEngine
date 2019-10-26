@@ -10,9 +10,10 @@
 using namespace rapidxml;
 
 const float EPSILON{ .0001f };
-const int HIGHLIGHT_EXPONENT{ 5 };
 const Color BACKGROUND_COLOR{ .05f, .05f, .05f };
 const Color HIGHLIGHT_COLOR{ 1.f, 1.f, 1.f };
+const int HIGHLIGHT_EXPONENT{ 5 };
+const int MAX_BOUNCES{ 3 };
 
 Scene::Scene(const string& filename) : m_inputFilename { filename }
 {
@@ -92,13 +93,14 @@ IntersectionResult Scene::getClosestIntersection(const Ray& ray)
 	return intersection;
 }
 
-Color Scene::traceRay(const Ray& ray)
+Color Scene::traceRay(const Ray& ray, int bounces)
 {
 	IntersectionResult intersection = getClosestIntersection(ray);
 	if (!intersection.intersects)
 		return BACKGROUND_COLOR;
 
-	Vector3f offsetIntersection = intersection.position + intersection.surfaceNormal * EPSILON; // Offset needed to avoid hitting intersected shape again
+	Vector3f absNormal = intersection.inside ? -intersection.surfaceNormal : intersection.surfaceNormal;
+	Vector3f offsetIntersection = intersection.position + absNormal * EPSILON; // Offset needed to avoid hitting intersected shape again
 	const Material& material = m_materials[intersection.materialName];
 
 	Color lightColor;
@@ -111,10 +113,38 @@ Color Scene::traceRay(const Ray& ray)
 		IntersectionResult shadowIntersection = getClosestIntersection(shadowRay);
 		if (!shadowIntersection.intersects || shadowIntersection.distance > lightDistance)
 		{
-			lightColor += light.getColor() * max(.0f, shadowRay.getDirection().dot(intersection.surfaceNormal));
-			Vector3f reflected = shadowRay.getDirection().reflected(intersection.surfaceNormal);
+			lightColor += light.getColor() * max(.0f, shadowRay.getDirection().dot(absNormal));
+			Vector3f reflected = shadowRay.getDirection().reflected(absNormal);
 			highlightIntensity += pow(reflected.dot(-ray.getDirection()), HIGHLIGHT_EXPONENT);
 		}
 	}
-	return (lightColor.clamped(0, 1) * material.getColor() + HIGHLIGHT_COLOR * highlightIntensity).clamped(0, 1);
+	Color mainColor = (lightColor.clamped(0, 1) * material.getColor() + HIGHLIGHT_COLOR * highlightIntensity).clamped(0, 1);
+
+	if (material.getReflectance() > 0 && bounces < MAX_BOUNCES)
+	{
+		Ray reflectedRay{ offsetIntersection, offsetIntersection + (-ray.getDirection()).reflected(absNormal) };
+		Color reflectedColor = traceRay(reflectedRay, bounces + 1);
+		return mainColor * (1 - material.getReflectance()) + reflectedColor * material.getReflectance();
+	}
+
+	if (material.getTransparency() > 0 && bounces < MAX_BOUNCES)
+	{
+		Vector3f insetIntersection = intersection.position - absNormal * EPSILON;
+		float n1 = intersection.inside ? material.getRefracionIndex() : 1.f;
+		float n2 = intersection.inside ? 1.f : material.getRefracionIndex();
+		float reflectionRate = ray.getDirection().reflectionRate(absNormal, n1, n2);
+		Ray reflectedRay{ offsetIntersection, offsetIntersection + (-ray.getDirection()).reflected(absNormal) };
+		Color reflectedColor = traceRay(reflectedRay, bounces + 1);
+		if (reflectionRate < 1)
+		{
+			Vector3f refractedDirection = ray.getDirection().refracted(absNormal, n1, n2);
+			Ray refractedRay{ insetIntersection, insetIntersection + refractedDirection };
+			Color refractedColor = traceRay(refractedRay, bounces + 1);
+			Color resultColor = refractedColor * (1 - reflectionRate) + reflectedColor * reflectionRate;
+			return mainColor * (1 - material.getTransparency()) + resultColor * material.getTransparency();
+		}
+		return mainColor * (1 - material.getTransparency()) + reflectedColor * material.getTransparency();
+	}
+
+	return mainColor;
 }

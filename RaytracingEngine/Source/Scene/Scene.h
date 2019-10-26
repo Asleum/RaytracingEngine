@@ -20,7 +20,7 @@ class Scene
 	unordered_map<string, Material> m_materials;
 
 	IntersectionResult getClosestIntersection(const Ray& ray);
-	Color traceRay(const Ray& ray);
+	Color traceRay(const Ray& ray, int bounces = 0);
 public:
 	Scene(const string& filename);
 	const unique_ptr<Camera>& getCamera() const { return m_pCamera; }

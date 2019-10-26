@@ -8,4 +8,5 @@ Material::Material(const xml_node<>* node)
 	m_diffuseColor = Vector3f{ node->first_node("color"), "r", "g", "b" } / 255;
 	m_reflectance = readValue<float>(node->first_node("reflectance"));
 	m_transparency = readValue<float>(node->first_node("transparency"));
+	m_refractionIndex = readValue<float>(node->first_node("refractionIndex"));
 }
