@@ -22,9 +22,9 @@
     <ClCompile Include="Lib\lodepng.cpp" />
     <ClCompile Include="Source\Geometry\Ray.cpp" />
     <ClCompile Include="Source\Geometry\Vector3.cpp" />
-    <ClCompile Include="Source\Materials\Material.cpp" />
     <ClCompile Include="Source\Scene\AbstractShape.cpp" />
     <ClCompile Include="Source\Scene\Camera.cpp" />
+    <ClCompile Include="Source\Scene\Material.cpp" />
     <ClCompile Include="Source\Scene\PointLight.cpp" />
     <ClCompile Include="Source\Scene\Scene.cpp" />
     <ClCompile Include="Source\Scene\Shapes\Plane.cpp" />
@@ -35,9 +35,9 @@
     <ClInclude Include="Lib\lodepng.h" />
     <ClInclude Include="Source\Geometry\Ray.h" />
     <ClInclude Include="Source\Geometry\Vector3.h" />
-    <ClInclude Include="Source\Materials\Material.h" />
     <ClInclude Include="Source\Scene\AbstractShape.h" />
     <ClInclude Include="Source\Scene\Camera.h" />
+    <ClInclude Include="Source\Scene\Material.h" />
     <ClInclude Include="Source\Scene\PointLight.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\Scene\Shapes\Plane.h" />

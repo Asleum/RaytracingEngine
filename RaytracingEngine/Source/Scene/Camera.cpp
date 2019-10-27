@@ -1,6 +1,8 @@
-#include "Camera.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <stdexcept>
 #include <iostream>
+#include "Camera.h"
 
 using namespace std;
 
@@ -8,6 +10,7 @@ Camera::Camera(const xml_node<>* node)
 {
 	if (!node)
 		throw runtime_error{ "malformed input, camera node not found" };
+	m_fieldOfView = readValue<float>(node->first_node("fieldOfView")) * M_PI / 180;
 	m_position = Vector3f{ node->first_node("position") };
 	m_orientation = Vector3f{ node->first_node("orientation") }.normalized();
 }

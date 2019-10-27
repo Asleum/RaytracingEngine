@@ -59,6 +59,7 @@ public:
 		assert(sin2Squared < 1);
 		return (*this) * ratio + normal * (ratio * cos1 - sqrt(1 - sin2Squared));
 	}
+	// Reflection rate given by Schlick's approximation
 	T reflectionRate(const Vector3<T>& normal, T n1, T n2) const
 	{
 		T r0 = pow((n1 - n2) / (n1 + n2), 2);
@@ -73,6 +74,10 @@ public:
 			T cos2 = sqrt(1 - sin2Squared);
 			return r0 + (1 - r0) * pow(1 - cos2, 5);
 		}
+	}
+	Vector3<T> lerp(const Vector3<T>& other, T t)
+	{
+		return (*this) * (1 - t) + other * t;
 	}
 };
 

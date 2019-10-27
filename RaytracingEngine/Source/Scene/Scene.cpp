@@ -21,18 +21,6 @@ Scene::Scene(const string& filename) : m_inputFilename { filename }
 	xml_document<> document;
 	document.parse<0>(xmlFile.data());
 
-	if (xml_node<>* materials = document.first_node("materials"))
-	{
-		for (xml_node<>* node = materials->first_node(); node; node = node->next_sibling())
-		{
-			if (string{ node->name() } == "material")
-			{
-				string name = readValue<string>(node->first_node("name"));
-				m_materials[name] = Material{ node };
-			}
-		}
-	}
-
 	if (xml_node<>* root = document.first_node("scene"))
 	{
 		for (xml_node<>* node = root->first_node(); node; node = node->next_sibling())
@@ -55,6 +43,11 @@ Scene::Scene(const string& filename) : m_inputFilename { filename }
 			else if (name == "pointLight")
 			{
 				m_lights.emplace_back(node);
+			}
+			if (string{ node->name() } == "material")
+			{
+				string name = readValue<string>(node->first_node("name"));
+				m_materials[name] = Material{ node };
 			}
 		}
 	}
@@ -96,37 +89,34 @@ Color Scene::traceRay(const Ray& ray, int bounces)
 		IntersectionResult shadowIntersection = getClosestIntersection(shadowRay);
 		if (!shadowIntersection.intersects || shadowIntersection.distance > lightDistance)
 		{
-			lightColor += light.getColor() * max(.0f, shadowRay.getDirection().dot(absNormal));
+			lightColor += light.getColor() * max(.0f, shadowRay.getDirection().dot(absNormal)); // Phong shading
 			Vector3f reflected = shadowRay.getDirection().reflected(absNormal);
-			highlightIntensity += pow(reflected.dot(-ray.getDirection()), HIGHLIGHT_EXPONENT);
+			highlightIntensity += pow(reflected.dot(-ray.getDirection()), HIGHLIGHT_EXPONENT); // Specular highlight
 		}
 	}
 	Color mainColor = (lightColor.clamped(0, 1) * material.getColor() + HIGHLIGHT_COLOR * highlightIntensity).clamped(0, 1);
 
-	if (material.getReflectance() > 0 && bounces < MAX_BOUNCES)
+	if ((material.getTransparency() > 0 || material.getReflectance() > 0) && bounces < MAX_BOUNCES)
 	{
 		Ray reflectedRay{ offsetIntersection, offsetIntersection + (-ray.getDirection()).reflected(absNormal) };
 		Color reflectedColor = traceRay(reflectedRay, bounces + 1);
-		return mainColor * (1 - material.getReflectance()) + reflectedColor * material.getReflectance();
-	}
-
-	if (material.getTransparency() > 0 && bounces < MAX_BOUNCES)
-	{
-		Vector3f insetIntersection = intersection.position - absNormal * EPSILON;
-		float n1 = intersection.inside ? material.getRefracionIndex() : 1.f;
-		float n2 = intersection.inside ? 1.f : material.getRefracionIndex();
-		float reflectionRate = ray.getDirection().reflectionRate(absNormal, n1, n2);
-		Ray reflectedRay{ offsetIntersection, offsetIntersection + (-ray.getDirection()).reflected(absNormal) };
-		Color reflectedColor = traceRay(reflectedRay, bounces + 1);
-		if (reflectionRate < 1)
+		if (material.getTransparency() > 0)
 		{
-			Vector3f refractedDirection = ray.getDirection().refracted(absNormal, n1, n2);
-			Ray refractedRay{ insetIntersection, insetIntersection + refractedDirection };
-			Color refractedColor = traceRay(refractedRay, bounces + 1);
-			Color resultColor = refractedColor * (1 - reflectionRate) + reflectedColor * reflectionRate;
-			return mainColor * (1 - material.getTransparency()) + resultColor * material.getTransparency();
+			float n1 = intersection.inside ? material.getRefracionIndex() : 1.f;
+			float n2 = intersection.inside ? 1.f : material.getRefracionIndex();
+			float reflectionRate = ray.getDirection().reflectionRate(absNormal, n1, n2);
+			if (reflectionRate < 1)
+			{
+				Vector3f refractedDirection = ray.getDirection().refracted(absNormal, n1, n2);
+				Vector3f insetIntersection = intersection.position - absNormal * EPSILON;
+				Ray refractedRay{ insetIntersection, insetIntersection + refractedDirection };
+				Color refractedColor = traceRay(refractedRay, bounces + 1);
+				Color resultColor = refractedColor.lerp(reflectedColor, reflectionRate);
+				return mainColor.lerp(resultColor, material.getTransparency());
+			}
+			return mainColor.lerp(reflectedColor, material.getTransparency());
 		}
-		return mainColor * (1 - material.getTransparency()) + reflectedColor * material.getTransparency();
+		return mainColor.lerp(reflectedColor, material.getReflectance());
 	}
 
 	return mainColor;

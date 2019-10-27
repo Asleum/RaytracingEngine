@@ -6,8 +6,8 @@
 #include "Camera.h"
 #include "Scene/AbstractShape.h"
 #include "Scene/PointLight.h"
+#include "Scene/Material.h"
 #include "Geometry/Ray.h"
-#include "Materials/Material.h"
 
 using namespace std;
 
