@@ -68,7 +68,7 @@
     </material>
     <material>
         <name>blue</name>
-        <reflectance>0</reflectance>
+        <reflectance>0.5</reflectance>
         <transparency>0</transparency>
         <refractionIndex>1</refractionIndex>
         <color>
