@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv [])
 {
-	if (argc != 4)
+	if (argc < 2 || argc > 5 || !strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
 	{
 		cout << "usage: RaytracingEngineCli pathToInput resolutionX=300 resolutionY=200 concurrentThreads=4" << endl;
 		return 0;
