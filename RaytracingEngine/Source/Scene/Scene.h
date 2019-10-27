@@ -11,6 +11,7 @@
 
 using namespace std;
 
+
 class Scene
 {
 	const string m_inputFilename;
@@ -19,10 +20,10 @@ class Scene
 	vector<PointLight> m_lights;
 	vector<Color> m_image;
 	unordered_map<string, Material> m_materials;
-	int m_renderResolutionX;
-	int m_renderResolutionY;
+	int m_renderResolutionX{ 0 };
+	int m_renderResolutionY{ 0 };
 
-	IntersectionResult getClosestIntersection(const Ray& ray);
+	IntersectionResult getClosestIntersection(const Ray& ray) const;
 	Color traceRay(const Ray& ray, int bounces = 0);
 public:
 	Scene(const string& filename);

@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lib\lodepng.cpp" />
-    <ClCompile Include="Source\Geometry\Ray.cpp" />
-    <ClCompile Include="Source\Geometry\Vector3.cpp" />
     <ClCompile Include="Source\Scene\AbstractShape.cpp" />
     <ClCompile Include="Source\Scene\Camera.cpp" />
     <ClCompile Include="Source\Scene\Material.cpp" />
@@ -29,7 +27,6 @@
     <ClCompile Include="Source\Scene\Scene.cpp" />
     <ClCompile Include="Source\Scene\Shapes\Plane.cpp" />
     <ClCompile Include="Source\Scene\Shapes\Sphere.cpp" />
-    <ClCompile Include="Source\Utils\xmlUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib\lodepng.h" />

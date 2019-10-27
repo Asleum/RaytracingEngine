@@ -1,10 +1,10 @@
 #pragma once
 #include "Scene/AbstractShape.h"
-#include "Geometry/Vector3.h"
+
+using namespace rapidxml;
 
 
-class Sphere :
-	public AbstractShape
+class Sphere : public AbstractShape
 {
 	float m_radius;
 	Vector3f m_position;

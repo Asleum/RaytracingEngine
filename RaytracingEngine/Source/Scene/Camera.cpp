@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 Camera::Camera(const xml_node<>* node)
 {
 	if (!node)

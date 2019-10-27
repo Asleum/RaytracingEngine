@@ -1,5 +1,6 @@
 #include "AbstractShape.h"
 
+
 AbstractShape::AbstractShape(const xml_node<>* node)
 {
 	if (!node)

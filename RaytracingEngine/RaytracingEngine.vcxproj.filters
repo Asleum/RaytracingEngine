@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Utils">
-      <UniqueIdentifier>{aece84ff-7ca9-4ac7-b6eb-cfbc8040b97d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geometry">
-      <UniqueIdentifier>{4a148820-3553-49f4-a593-bf3870fb9239}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Geometry">
       <UniqueIdentifier>{450e5780-6332-46d8-a0de-91ea2071ded2}</UniqueIdentifier>
     </Filter>
@@ -51,23 +45,14 @@
     <ClCompile Include="Source\Scene\Camera.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Geometry\Vector3.cpp">
-      <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene\AbstractShape.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Shapes\Plane.cpp">
       <Filter>Source Files\Scene\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utils\xmlUtils.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene\Shapes\Sphere.cpp">
       <Filter>Source Files\Scene\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Geometry\Ray.cpp">
-      <Filter>Source Files\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Lib\lodepng.cpp">
       <Filter>Source Files\Lib</Filter>

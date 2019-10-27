@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 Plane::Plane(const xml_node<>* node) : AbstractShape(node)
 {
 	m_position = Vector3f{ node->first_node("position") };

@@ -25,6 +25,4 @@ private slots:
 	void onBrowseButtonClicked();
 	void onRenderFinished();
 
-signals:
-	void operate(Scene& scene);
 };

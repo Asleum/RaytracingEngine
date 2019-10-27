@@ -14,10 +14,9 @@ Sphere::Sphere(const xml_node<>* node) : AbstractShape(node)
 IntersectionResult Sphere::intersect(const Ray& ray) const
 {
 	IntersectionResult result;
-	//pos, surf, dist, intersects
-	float a{ ray.getDirection().dot(ray.getDirection()) };
-	float b{ ray.getDirection().dot(ray.getOrigin() - m_position) * 2 };
-	float c{ (ray.getOrigin() - m_position).dot(ray.getOrigin() - m_position) - pow(m_radius, 2) };
+	float a = ray.getDirection().dot(ray.getDirection());
+	float b = ray.getDirection().dot(ray.getOrigin() - m_position) * 2;
+	float c = (ray.getOrigin() - m_position).dot(ray.getOrigin() - m_position) - pow(m_radius, 2);
 	float delta = pow(b, 2) - 4 * a * c;
 	if (delta < 0)
 		return result;

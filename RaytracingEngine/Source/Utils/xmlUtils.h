@@ -6,6 +6,7 @@
 using namespace std;
 using namespace rapidxml;
 
+
 template<typename T>
 T readValue(const xml_node<>* node)
 {

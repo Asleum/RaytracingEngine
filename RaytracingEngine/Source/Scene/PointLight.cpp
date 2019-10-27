@@ -1,6 +1,7 @@
 #include "PointLight.h"
 #include <iostream>
 
+
 PointLight::PointLight(const xml_node<>* node)
 {
 	if (!node)

@@ -15,6 +15,7 @@ const Color HIGHLIGHT_COLOR{ 1.f, 1.f, 1.f };
 const int HIGHLIGHT_EXPONENT{ 5 };
 const int MAX_BOUNCES{ 3 };
 
+
 Scene::Scene(const string& filename) : m_inputFilename { filename }
 {
 	file<> xmlFile{ filename.c_str() };
@@ -52,10 +53,10 @@ Scene::Scene(const string& filename) : m_inputFilename { filename }
 		}
 	}
 	else
-		throw runtime_error{ "malformed input file, no scene node" };
+		throw runtime_error{ "malformed input file, no root scene node" };
 }
 
-IntersectionResult Scene::getClosestIntersection(const Ray& ray)
+IntersectionResult Scene::getClosestIntersection(const Ray& ray) const
 {
 	IntersectionResult intersection;
 	for (auto& shape : m_shapes)

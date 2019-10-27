@@ -15,7 +15,7 @@ RaytracingEngineGUI::RaytracingEngineGUI(QWidget *parent)
 	resize(sizeHint());
 }
 
-void RaytracingEngineGUI::onStartButtonClicked() 
+void RaytracingEngineGUI::onStartButtonClicked()  
 {
 	ui.startButton->setEnabled(false);
 	try {
