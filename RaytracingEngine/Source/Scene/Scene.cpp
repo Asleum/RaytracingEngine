@@ -62,23 +62,6 @@ Scene::Scene(const string& filename) : m_inputFilename { filename }
 		throw runtime_error{ "malformed input file, no scene node" };
 }
 
-void Scene::makeImage(int resolutionX, int resolutionY)
-{
-	vector<unsigned char> image;
-	image.reserve(resolutionX * resolutionY * 4);
-	for (Ray& ray : m_pCamera->getViewportRays(resolutionX, resolutionY))
-	{
-		Color color = traceRay(ray);
-		image.push_back(static_cast<unsigned char>(color.getX() * 255));
-		image.push_back(static_cast<unsigned char>(color.getY() * 255));
-		image.push_back(static_cast<unsigned char>(color.getZ() * 255));
-		image.push_back(255);
-	}
-
-	if (auto error = lodepng::encode(m_inputFilename + ".png", image, resolutionX, resolutionY))
-		throw runtime_error(lodepng_error_text(error));
-}
-
 IntersectionResult Scene::getClosestIntersection(const Ray& ray)
 {
 	IntersectionResult intersection;
@@ -147,4 +130,49 @@ Color Scene::traceRay(const Ray& ray, int bounces)
 	}
 
 	return mainColor;
+}
+
+void Scene::prepareRendering(int resolutionX, int resolutionY)
+{
+	if (resolutionX <= 0 || resolutionY <= 0)
+		throw runtime_error("bad resolution value entered");
+	assert(m_pCamera);
+	m_renderResolutionX = resolutionX;
+	m_renderResolutionY = resolutionY;
+	m_image.clear();
+	m_image.resize(resolutionX * resolutionY);
+	m_pCamera->calculateViewportRays(resolutionX, resolutionY);
+}
+
+void Scene::renderPixel(int pixelIndex)
+{
+	assert(pixelIndex >= 0 && pixelIndex < m_image.size());
+	assert(m_pCamera);
+	const Ray& ray = m_pCamera->getViewportRay(pixelIndex);
+	m_image[pixelIndex] = traceRay(ray);
+}
+
+void Scene::renderAll()
+{
+	for (int i = 0; i != m_image.size(); ++i)
+	{
+		renderPixel(i);
+	}
+}
+
+string Scene::finalizeRendering()
+{
+	vector<unsigned char> pixelsColors;
+	pixelsColors.reserve(m_image.size() * 4);
+	for (Color& color : m_image)
+	{
+		pixelsColors.push_back(static_cast<unsigned char>(color.getX() * 255));
+		pixelsColors.push_back(static_cast<unsigned char>(color.getY() * 255));
+		pixelsColors.push_back(static_cast<unsigned char>(color.getZ() * 255));
+		pixelsColors.push_back(255);
+	}
+	const string outFilename = m_inputFilename + ".png";
+	if (auto error = lodepng::encode(outFilename, pixelsColors, m_renderResolutionX, m_renderResolutionY))
+		throw runtime_error(lodepng_error_text(error));
+	return outFilename;
 }

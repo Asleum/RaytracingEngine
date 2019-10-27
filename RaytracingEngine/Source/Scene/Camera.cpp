@@ -12,10 +12,10 @@ Camera::Camera(const xml_node<>* node)
 	m_orientation = Vector3f{ node->first_node("orientation") }.normalized();
 }
 
-vector<Ray> Camera::getViewportRays(int resolutionX, int resolutionY) const
+void Camera::calculateViewportRays(int resolutionX, int resolutionY)
 {
-	vector<Ray> pixels;
-	pixels.reserve(resolutionX * resolutionY);
+	m_viewportRays.clear();
+	m_viewportRays.reserve(resolutionX * resolutionY);
 
 	Vector3f xDirection = m_orientation.cross(Vector3f{ 0, 0, 1 }).normalized();
 	Vector3f yDirection = m_orientation.cross(xDirection).normalized();
@@ -28,8 +28,13 @@ vector<Ray> Camera::getViewportRays(int resolutionX, int resolutionY) const
 	{
 		for (int x = 0; x != resolutionX; ++x)
 		{
-			pixels.emplace_back(m_position, position + xIncrement * static_cast<float>(x) + yIncrement * static_cast<float>(y));
+			m_viewportRays.emplace_back(m_position, position + xIncrement * static_cast<float>(x) + yIncrement * static_cast<float>(y));
 		}
 	}
-	return pixels;
+}
+
+const Ray& Camera::getViewportRay(int index) const
+{
+	assert(index >= 0 && index < m_viewportRays.size());
+	return m_viewportRays[index];
 }

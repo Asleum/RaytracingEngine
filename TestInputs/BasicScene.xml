@@ -3,12 +3,12 @@
         <position>
             <x>0</x>
             <y>-20</y>
-            <z>15</z>
+            <z>10</z>
         </position>
         <orientation>
             <x>0</x>
             <y>1</y>
-            <z>-0.3</z>
+            <z>-0</z>
         </orientation>
     </camera>
     <plane>

@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Lib">
       <UniqueIdentifier>{280bc30b-f3a9-48cf-b9b2-9860f343e908}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Materials">
+      <UniqueIdentifier>{57430b55-c181-4b5e-b0dd-11bc59448a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Materials">
+      <UniqueIdentifier>{a29c5884-4cc4-4d37-9659-b154bd911c89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Scene\Scene.cpp">
@@ -76,7 +82,7 @@
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\Materials\Material.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +117,7 @@
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Materials\Material.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
